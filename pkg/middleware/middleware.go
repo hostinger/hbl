@@ -1,4 +1,4 @@
-package hbl
+package middleware
 
 import (
 	"net/http"

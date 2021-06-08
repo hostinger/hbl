@@ -22,8 +22,8 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh "/bin/docker build -t eu.gcr.io/hostinger-systems/hostinger-hbl:${env.TAG} -t eu.gcr.io/hostinger-systems/hostinger-hbl:latest ."
-        sh "/bin/docker push eu.gcr.io/hostinger-systems/hostinger-hbl --all-tags"
+        sh "/bin/docker build -t eu.gcr.io/hostinger-systems/hbl:${env.TAG} -t eu.gcr.io/hostinger-systems/hbl:latest ."
+        sh "/bin/docker push eu.gcr.io/hostinger-systems/hbl --all-tags"
       }
     }
     stage('Deploy') {
@@ -42,8 +42,8 @@ pipeline {
     }
     stage('Cleanup') {
       steps {
-        sh "/bin/docker rmi eu.gcr.io/hostinger-systems/hostinger-hbl:${env.TAG}"
-        sh "/bin/docker rmi eu.gcr.io/hostinger-systems/hostinger-hbl:latest"
+        sh "/bin/docker rmi eu.gcr.io/hostinger-systems/hbl:${env.TAG}"
+        sh "/bin/docker rmi eu.gcr.io/hostinger-systems/hbl:latest"
       }
     }
   }

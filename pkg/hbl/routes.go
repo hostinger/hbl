@@ -1,6 +1,9 @@
 package hbl
 
-import "github.com/labstack/echo/v4"
+import (
+	"github.com/hostinger/hbl/pkg/middleware"
+	"github.com/labstack/echo/v4"
+)
 
 type Route struct {
 	Method     string
@@ -28,7 +31,7 @@ func (api *API) GetRoutes() []*Route {
 			Path:   "/api/v1/addresses",
 			Func:   api.Handler.HandleAddressesGetAll,
 			Middleware: []echo.MiddlewareFunc{
-				KeyAuthMiddleware,
+				middleware.KeyAuthMiddleware,
 			},
 		},
 		{
@@ -36,7 +39,7 @@ func (api *API) GetRoutes() []*Route {
 			Path:   "/api/v1/addresses",
 			Func:   api.Handler.HandleAddressesPost,
 			Middleware: []echo.MiddlewareFunc{
-				KeyAuthMiddleware,
+				middleware.KeyAuthMiddleware,
 			},
 		},
 		{
@@ -44,7 +47,7 @@ func (api *API) GetRoutes() []*Route {
 			Path:   "/api/v1/addresses/:ip",
 			Func:   api.Handler.HandleAddressesGetOne,
 			Middleware: []echo.MiddlewareFunc{
-				KeyAuthMiddleware,
+				middleware.KeyAuthMiddleware,
 			},
 		},
 		{
@@ -52,7 +55,7 @@ func (api *API) GetRoutes() []*Route {
 			Path:   "/api/v1/addresses/:ip",
 			Func:   api.Handler.HandleAddressesDelete,
 			Middleware: []echo.MiddlewareFunc{
-				KeyAuthMiddleware,
+				middleware.KeyAuthMiddleware,
 			},
 		},
 		{
@@ -60,7 +63,7 @@ func (api *API) GetRoutes() []*Route {
 			Path:   "/api/v1/addresses/check/:name/:ip",
 			Func:   api.Handler.HandleAddressesCheck,
 			Middleware: []echo.MiddlewareFunc{
-				KeyAuthMiddleware,
+				middleware.KeyAuthMiddleware,
 			},
 		},
 		{
@@ -68,7 +71,7 @@ func (api *API) GetRoutes() []*Route {
 			Path:   "/api/v1/addresses/sync",
 			Func:   api.Handler.HandleAddressesSyncAll,
 			Middleware: []echo.MiddlewareFunc{
-				KeyAuthMiddleware,
+				middleware.KeyAuthMiddleware,
 			},
 		},
 		{
@@ -76,7 +79,7 @@ func (api *API) GetRoutes() []*Route {
 			Path:   "/api/v1/addresses/sync/:ip",
 			Func:   api.Handler.HandleAddressesSyncOne,
 			Middleware: []echo.MiddlewareFunc{
-				KeyAuthMiddleware,
+				middleware.KeyAuthMiddleware,
 			},
 		},
 	}
