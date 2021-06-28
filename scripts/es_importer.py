@@ -24,6 +24,8 @@ def parse_args():
     optional.add_argument("--es_port", default=443, help='80 or 443, default: 443', type=int, env_var='ES_PORT')
     optional.add_argument("--ban_threshold", default=1000,
                           help='Count to get banned, integer, default: 1000', type=int, env_var='BAN_THRESHOLD')
+    optional.add_argument("--ban_uniq_webs", default=5,
+                          help='Unique webs to get banned, integer, default: 5', type=int, env_var='BAN_UNIQ_WEBS')
     required.add_argument("--hbl_url", help='HBL API base url', type=str, env_var='HBL_URL')
     required.add_argument("--hbl_key", help='HBL API key for auth', env_var='HBL_KEY')
 
@@ -148,7 +150,7 @@ def main():
         # Check if IP is above threshold, > 10 unique webs and is valid ipv4
         if (bucket['doc_count'] > args.ban_threshold
                 and ipaddress.IPv4Address(bucket['key']).is_global
-                and bucket.hosts['value'] > 10):
+                and bucket.hosts['value'] > args.ban_uniq_webs):
             # Append to list of tuples
             badlist.append({'ipaddress': bucket['key'],
                             'xml_hits': bucket['doc_count'],
